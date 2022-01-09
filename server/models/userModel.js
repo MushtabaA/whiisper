@@ -1,4 +1,7 @@
 import mongoose from 'mongoose';
+import session from 'express-session';
+import passport from "passport";
+import passportLocalMongoose from "passport-local-mongoose";
 
 const userSchema = mongoose.Schema(
     {
@@ -20,6 +23,8 @@ const userSchema = mongoose.Schema(
         timestamps: true,
     }
 );
+
+userSchema.plugin(passportLocalMongoose);
 
 const User = mongoose.model('User', userSchema);
 

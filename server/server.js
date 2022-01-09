@@ -20,7 +20,13 @@ app.use(session({
     saveUninitialized: false
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 mongoose.connect(process.env.DB_URI, {useNewUrlParser: true});
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.listen(3000, function() {
     console.log("Server started on port 3000.");
