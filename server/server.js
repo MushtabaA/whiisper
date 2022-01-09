@@ -2,6 +2,9 @@ import express from "express";
 import dotenv from 'dotenv';
 import ejs from "ejs";
 import mongoose from "mongoose";
+import session from 'express-session';
+import passport from "passport";
+import passportLocalMongoose from "passport-local-mongoose";
 import { User } from "./models/userModel.js";
 
 dotenv.config();
@@ -10,6 +13,12 @@ const app = express();
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
+
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
 
 mongoose.connect(process.env.DB_URI, {useNewUrlParser: true});
 
