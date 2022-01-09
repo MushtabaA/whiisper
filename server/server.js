@@ -1,8 +1,10 @@
-const express = require("express");
-const ejs = require("ejs");
-const mongoose = require("mongoose");
-require('dotenv').config();
+import express from "express";
+import dotenv from 'dotenv';
+import ejs from "ejs";
+import mongoose from "mongoose";
+import { User } from "./models/userModel.js";
 
+dotenv.config();
 const app = express();
 
 app.use(express.static("public"));
@@ -25,4 +27,25 @@ app.get("/login", function(req, res) {
 
 app.get("/signup", function(req, res) {
     res.render("signup");
+});
+
+app.post("/signup", function(req, res) {
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const newUser = new User({
+        name: name,
+        email: email,
+        password: password,
+    });
+
+    newUser.save(function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("User successfully created");
+        }
+    });
+
 });
