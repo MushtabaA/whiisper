@@ -25,6 +25,8 @@ app.use(passport.session());
 
 mongoose.connect(process.env.DB_URI, {useNewUrlParser: true});
 
+passport.use(User.createStrategy());
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -44,23 +46,25 @@ app.get("/signup", function(req, res) {
     res.render("signup");
 });
 
+app.post("/login", function(req, res) {
+
+});
+
 app.post("/signup", function(req, res) {
     const name = req.body.name;
     const email = req.body.email;
-    const password = req.body.password;
 
     const newUser = new User({
         name: name,
-        email: email,
-        password: password,
+        username: email
     });
 
-    newUser.save(function (err) {
+    User.register(newUser, req.body.password, function(err, user) {
         if (err) {
             console.log(err);
+            res.redirect("/signup");
         } else {
-            console.log("User successfully created");
+            res.redirect("/");
         }
     });
-
 });
