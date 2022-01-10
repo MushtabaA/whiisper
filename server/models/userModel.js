@@ -21,8 +21,21 @@ const userSchema = mongoose.Schema(
     }
 );
 
+const whisperSchema = mongoose.Schema(
+    {
+        whisper: {
+            type: String,
+            required: true,
+        }
+    },
+    {
+        timestamps: true,
+    }
+);
+
 userSchema.plugin(passportLocalMongoose, {usernameField: "email" });
 
 const User = mongoose.model('User', userSchema);
+const Whisper = mongoose.model('Whisper', whisperSchema);
 
-export { User };
+export { User, Whisper };

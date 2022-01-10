@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import session from 'express-session';
 import passport from "passport";
 import passportLocalMongoose from "passport-local-mongoose";
-import { User } from "./models/userModel.js";
+import { User, Whisper } from "./models/userModel.js";
 
 dotenv.config();
 const app = express();
