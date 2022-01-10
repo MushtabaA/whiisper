@@ -37,7 +37,7 @@ app.listen(3000, function() {
 app.get("/", async function(req, res) {
     if (req.isAuthenticated()) {
         const whispers = await Whisper.find();
-        res.render("whiisper", {whispers: whispers});
+        res.render("whiisper", {whispers: whispers, user: req.user.name});
     } else {
         res.render("home");
     }
@@ -46,7 +46,7 @@ app.get("/", async function(req, res) {
 app.get("/login", async function(req, res) {
     if (req.isAuthenticated()) {
         const whispers = await Whisper.find();
-        res.render("whiisper", {whispers: whispers});
+        res.render("whiisper", {whispers: whispers, user: req.user.name});
     } else {
         res.render("login");
     }
@@ -55,7 +55,7 @@ app.get("/login", async function(req, res) {
 app.get("/signup", async function(req, res) {
     if (req.isAuthenticated()) {
         const whispers = await Whisper.find();
-        res.render("whiisper", {whispers: whispers});
+        res.render("whiisper", {whispers: whispers, user: req.user.name});
     } else {
         res.render("signup");
     }
@@ -64,7 +64,7 @@ app.get("/signup", async function(req, res) {
 app.get("/whiisper", async function(req, res) {
     if (req.isAuthenticated()) {
         const whispers = await Whisper.find();
-        res.render("whiisper", {whispers: whispers});
+        res.render("whiisper", {whispers: whispers, user: req.user.name});
     } else {
         res.render("home");
     }
