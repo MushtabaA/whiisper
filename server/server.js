@@ -55,7 +55,16 @@ app.get("/whiisper", function(req, res) {
 });
 
 app.get("/submitwhiisper", function(req, res) {
-    res.render("submitwhiisper");
+    if (req.isAuthenticated()) {
+        res.render("submitwhiisper");
+    } else {
+        res.render("home");
+    }
+});
+
+app.get("/logout", function(req, res){
+    req.logout();
+    res.redirect("/");
 });
 
 app.post("/login", function(req, res) {
