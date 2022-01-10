@@ -122,9 +122,7 @@ app.post("/signup", function(req, res) {
             console.log(err);
             res.redirect("/signup");
         } else {
-            passport.authenticate("local")(req, res, function() {
-                res.redirect("/whiisper");
-            });
+            res.redirect("/login");
         }
     });
 });
