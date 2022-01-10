@@ -46,8 +46,41 @@ app.get("/signup", function(req, res) {
     res.render("signup");
 });
 
-app.post("/login", function(req, res) {
+app.get("/whiisper", function(req, res) {
+    if (req.isAuthenticated()) {
+        res.render("whiisper");
+    } else {
+        res.render("home");
+    }
+});
 
+app.get("/submitwhiisper", function(req, res) {
+    res.render("submitwhiisper");
+});
+
+app.post("/login", function(req, res) {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const newUser = new User({
+        email: email,
+        password: password
+    });
+
+    passport.authenticate('local', function(err, newUser) {
+        if (err) { 
+            console.log(err); 
+        }
+        if (!newUser) { 
+            return res.redirect('/login'); 
+        }
+        req.logIn(newUser, function(err) {
+          if (err) { 
+            console.log(err); 
+        }
+          return res.redirect("/whiisper");
+        });
+      })(req, res);
 });
 
 app.post("/signup", function(req, res) {
@@ -56,7 +89,7 @@ app.post("/signup", function(req, res) {
 
     const newUser = new User({
         name: name,
-        username: email
+        email: email
     });
 
     User.register(newUser, req.body.password, function(err, user) {
@@ -64,7 +97,9 @@ app.post("/signup", function(req, res) {
             console.log(err);
             res.redirect("/signup");
         } else {
-            res.redirect("/");
+            passport.authenticate("local")(req, res, function() {
+                res.redirect("/whiisper");
+            });
         }
     });
 });
