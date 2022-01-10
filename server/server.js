@@ -46,9 +46,10 @@ app.get("/signup", function(req, res) {
     res.render("signup");
 });
 
-app.get("/whiisper", function(req, res) {
+app.get("/whiisper", async function(req, res) {
     if (req.isAuthenticated()) {
-        res.render("whiisper");
+        const whispers = await Whisper.find();
+        res.render("whiisper", {whispers: whispers});
     } else {
         res.render("home");
     }
@@ -109,6 +110,26 @@ app.post("/signup", function(req, res) {
             passport.authenticate("local")(req, res, function() {
                 res.redirect("/whiisper");
             });
+        }
+    });
+});
+
+app.post("/submitwhiisper", function(req, res) {
+    const whisper = req.body.whiisper;
+
+    if (whisper.length == 0) {
+        return res.redirect("/submitwhiisper");
+    }
+
+    const newWhisper = new Whisper({
+        whisper: whisper
+    });
+
+    newWhisper.save(function(err) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect("/whiisper");
         }
     });
 });
