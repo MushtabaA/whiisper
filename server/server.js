@@ -34,16 +34,31 @@ app.listen(3000, function() {
     console.log("Server started on port 3000.");
 });
 
-app.get("/", function(req, res) {
-    res.render("home");
+app.get("/", async function(req, res) {
+    if (req.isAuthenticated()) {
+        const whispers = await Whisper.find();
+        res.render("whiisper", {whispers: whispers});
+    } else {
+        res.render("home");
+    }
 });
 
-app.get("/login", function(req, res) {
-    res.render("login");
+app.get("/login", async function(req, res) {
+    if (req.isAuthenticated()) {
+        const whispers = await Whisper.find();
+        res.render("whiisper", {whispers: whispers});
+    } else {
+        res.render("login");
+    }
 });
 
-app.get("/signup", function(req, res) {
-    res.render("signup");
+app.get("/signup", async function(req, res) {
+    if (req.isAuthenticated()) {
+        const whispers = await Whisper.find();
+        res.render("whiisper", {whispers: whispers});
+    } else {
+        res.render("signup");
+    }
 });
 
 app.get("/whiisper", async function(req, res) {
