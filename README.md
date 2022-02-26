@@ -1,3 +1,9 @@
+[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
+![made-with-express (1)](https://user-images.githubusercontent.com/66704595/155446809-c456baac-9b89-49b0-a93f-850934d6595c.svg)
+![made-with-node js](https://user-images.githubusercontent.com/66704595/155447041-6137aec1-532a-4094-928c-e84e2336fb42.svg)
+![db-mongodb](https://user-images.githubusercontent.com/66704595/155447686-f65eefd2-5780-42e1-9f89-9421a238fd38.svg)
+![deployed-on-heroku](https://user-images.githubusercontent.com/66704595/155449267-ee5d4f1f-a135-435e-96fa-14e255dfa75f.svg)
+
 # whiisper 🤫
 
 ![Whiisper-Home-Gif](https://user-images.githubusercontent.com/66704595/155858417-b1af3b2d-4665-46cc-89b4-befee7037ac5.gif)
